@@ -18,3 +18,44 @@ var_sv_breakdancer.toGff.pl  breakdancer.flt.txt   > breakdancer.somatic.sv.gff
 ```
 breakdancer结果可以用ANNOVAR进行注释
 
+## CREST
+```shell
+##step1
+perl software/CREST/countDiff.pl -d Mapping/T_CA.cover -g Mapping/N.cover > somatic.cover
+##sub1
+perl software/CREST/crest_sv_calling.pl\
+    -cov somatic.cover\
+    -outDir /crest\
+    -tumorBam T.final.bam\
+    -normalBam N.final.bam\
+    -sampleID crest.somatic.sv\
+    -regionList /human_B37/GRCh37.chr25Region.bed\
+    -ref /human_B37/GRCh37.fasta\
+    -bit /human_B37/GRCh37.fasta.2bit
+##sub2
+
+##sub3
+
+##sub4
+
+##sub5
+
+##sub6
+
+```
+## Lumpy
+```shell
+software/HUMAN/speedseq/speedseq/bin/lumpyexpress 
+        -B T.final.bam,N.final.bam \
+        -S T.split.bam,N.split.bam \
+        -D T.discord.bam,T.discord.bam \
+        -o lumpy.somatic.sv.vcf \
+        -x annotations/ceph18.b37.lumpy.exclude.2014-01-15.bed \
+        -T /Somatic/lumpy \
+        -K /software/HUMAN/speedseq/speedseq/bin/speedseq.config \
+        -P -v -k && \
+python lumpy_vcf2gff.py \
+        lumpy.somatic.sv.vcf \
+        lumpy.somatic.sv.gff && \
+        gzip lumpy.somatic.sv.vcf
+```
