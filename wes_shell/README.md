@@ -32,16 +32,16 @@ gatk/4.0.1.2/gatk MarkDuplicates -I sample.sorted.bam \
     -O --sample.sorted.markdup.bam \
     -M sample.sorted.markdup_metrics.txt
 ```
-##5 比对索引
+## 5 比对索引
 创建比对索引文件，它可以让我们快速地访问基因组上任意位置的比对情况，这一点非常有助于我们随时了解数据
 当有bam文件时，都可以创建索引
 ```shell
 samtools index sample.sorted.markdup.bam
 ```
-##6 局部重比对(RealignerTargetCreator、IndelRealigner)
+## 6 局部重比对(RealignerTargetCreator、IndelRealigner)
 这一步在GATK3中，GATK4已经取消，应该是加入到HaplotypeCaller中，老版本的GATK可以加入这一步
 
-##7 BQSR 碱基质量校正(BaseRecalibrator ApplyBQSR)
+## 7 BQSR 碱基质量校正(BaseRecalibrator ApplyBQSR)
 这里计算出了所有需要进行重校正的read和特征值，然后把这些信息输出为一份校准表文件（wes.recal_data.table）
 ```shell
 gatk/4.0.1.2/gatk BaseRecalibrator \
@@ -63,7 +63,7 @@ gatk/4.0.1.2/gatk ApplyBQSR \
 ```
 **注意：此步骤以及后面几个步骤中外显子数据要加上外显子捕获区域的bed文件，并把-ip设为reads长，全基因组数据则不需要加-L 和 -ip**
 
-##8 HaplotypeCaller(HaplotypeCaller CombineGVCFs GenotypeGVCFs)
+## 8 HaplotypeCaller(HaplotypeCaller CombineGVCFs GenotypeGVCFs)
 ```shell
 #HaplotypeCaller
 gatk/4.0.1.2/gatk HaplotypeCaller \
@@ -82,7 +82,7 @@ gatk/4.0.1.2/gatk GenotypeGVCFs \
   -V sample.g.vcf.gz \
   -O sample.vcf.gz && echo "** vcf done **"
 ```
-##9 变异质控和过滤(VariantRecalibrator ApplyVQSR)
+## 9 变异质控和过滤(VariantRecalibrator ApplyVQSR)
 
 质控的含义和目的是指通过一定的标准，最大可能地剔除假阳性的结果，并尽可能地保留最多的正确数据。
 第一种方法 GATK VQSR，它通过机器学习的方法利用多个不同的数据特征训练一个模型（高斯混合模型）对变异数据进行质控，使用VQSR需要具备以下两个条件：
