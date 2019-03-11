@@ -12,7 +12,7 @@
 bwa index ref.fa
 ##bwa比对，用samtools完成BAM格式转换
 bwa mem -t 4 \
-    -R '@RG\tID:foo\tPL:illumina\tSM:E.coli_K12' \
+    -R '@RG\tID:foo\tPL:illumina\tSM:sample' \
     ref.fa sample_1.fastq.gz sample_2.fastq.gz \
     |samtools view -Sb - > sample.bam
 ##-R 设置Read Group信息，它是read数据的组别标识，并且其中的ID，PL和SM信息在正式的项目中是不能缺少的
