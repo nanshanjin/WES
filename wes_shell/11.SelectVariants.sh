@@ -1,1 +1,0 @@
-soft/jdk1.8.0_20/bin/java -Xmx32G -jar soft/gatk-3.6/GenomeAnalysisTK.jar -T SelectVariants -R hg19/ucsc.hg19.fasta -V out.recalibrated_variants.vcf -sn sample1 -sn sample2 -sn sample3 -nt 6 -env -o out.final.vcf
