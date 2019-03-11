@@ -70,7 +70,7 @@ gatk/4.0.1.2/gatk HaplotypeCaller \
   -R ref.fa \
   --emit-ref-confidence GVCF \
   -I sample.sorted.markdup.BQSR.bam \
-  -O sample.g.vcf && echo "** gvcf done **"
+  -O sample.g.vcf
 #combine gvcf
 gatk/4.0.1.2/gatk CombineGVCFs \
   -R ref.fa \
@@ -79,8 +79,8 @@ gatk/4.0.1.2/gatk CombineGVCFs \
 #通过gvcf检测变异
 gatk/4.0.1.2/gatk GenotypeGVCFs \
   -R ref.fa \
-  -V sample.g.vcf.gz \
-  -O sample.vcf.gz && echo "** vcf done **"
+  -V all.g.vcf.gz \
+  -O sample.vcf.gz
 ```
 ## 9 变异质控和过滤(VariantRecalibrator ApplyVQSR)
 
