@@ -48,9 +48,9 @@ samtools index sample.sorted.markdup.bam
 gatk/4.0.1.2/gatk BaseRecalibrator \
   -R ref.fa\
   -I sample.sorted.markdup.bam \
-  --know-sites 1000G_phase1.indels.hg19.vcf \
-  --know-sites Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz \
-  --know-sites dbsnp_138.hg19.vcf.gz \
+  --known-sites 1000G_phase1.indels.hg19.vcf \
+  --known-sites Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz \
+  --known-sites dbsnp_138.hg19.vcf.gz \
   -O sample.sorted.markdup.recal_data.table
 ```
 ApplyBQSR这一步利用第一步得到的校准表文件（wes.recal_data.table）重新调整原来BAM文件中的碱基质量值，并使用这个新
