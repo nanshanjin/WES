@@ -75,7 +75,7 @@ gatk/4.0.1.2/gatk HaplotypeCaller \
 #combine gvcf
 gatk/4.0.1.2/gatk CombineGVCFs \
   -R ref.fa \
-  sample1.g.vcf sample2.g.vcf ....\
+  -V sample1.g.vcf -V sample2.g.vcf ....\
   -O all.g.vcf.gz \
 #通过gvcf检测变异
 gatk/4.0.1.2/gatk GenotypeGVCFs \
