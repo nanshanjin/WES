@@ -57,7 +57,7 @@ ApplyBQSR这一步利用第一步得到的校准表文件（wes.recal_data.table
 的质量值重新输出一份新的BAM>文件。
 ```shell
 gatk/4.0.1.2/gatk ApplyBQSR \
-   --brsr-recal-file sample.sorted.markdup.recal_data.table \
+   --bqsr-recal-file sample.sorted.markdup.recal_data.table \
    -R ref.fa \
    -I sample.sorted.markdup.bam \
    -O sample.sorted.markdup.BQSR.bam
