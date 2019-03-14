@@ -95,8 +95,8 @@ gatk/4.0.1.2/gatk GenotypeGVCFs \
 gatk/4.0.1.2/gatk VariantRecalibrator \
   -R ref.fa \
   -V sample.vcf.gz \
-  -resource:hapmap,know=false,training=true,truth=true,prior=15.0 hapmap_3.3.hg38.vcf \
-  -resource:omini,know=false,training=true,truth=false,prior=12.0 1000G_omni2.5.hg38.vcf \
+  -resource:hapmap,know=false,training=true,truth=true,prior=15.0 hapmap_3.3.hg19.vcf \
+  -resource:omini,know=false,training=true,truth=false,prior=12.0 1000G_omni2.5.hg19.vcf \
   -resource:1000G,know=false,training=true,truth=false,prior=10.0 1000G_phase1.snps.high_confidence.hg19.sites.vcf.gz \
   -resource:1000G,know=true,training=false,truth=false,prior=6.0 dbsnp_138.hg19.vcf.gz \
   -an DP #适用于WGS，不适用于WES\
@@ -108,10 +108,9 @@ gatk/4.0.1.2/gatk VariantRecalibrator \
   -O sample.snps.recal
 gatk/4.0.1.2/gatk ApplyVQSR \
   -R ref.fa \
-  -V sample.vcf.gz \
-  --ts_filter_level 99.0 \
+  -V sample.vcf.gz
   --tranches-file sample.snps.tranches \
-  -recalFile sample.snp.recal \
+  --recal-file sample.snps.recal \
   -mode SNP \
   -O sample.snps.VQSR.vcf.gz \
 #INDEL
@@ -122,15 +121,13 @@ gatk/4.0.1.2/gatk VariantRecalibrator \
   -an DP -an QD -an FS -an SOR -an ReadPosRankSum -an MQRankSum \
   -mode INDEL \
   --max-gaussians 6 \
-  -rscriptFile sample.indel.plot.R
   --tranches-file sample.indel.tranches
   -O sample.indel.recal
 gatk/4.0.1.2/gatk ApplyVQSR \
   -R ref.fa \
   -input  sample.indel.VQSR.vcf.gz \
-  --ts_filter_level 99.0 \
   --tranches-file sample.indel.tranches \
-  -recalFile sample.indel.recal \
+  --recal-file sample.indel.recal \
   -mode INDEL \
   -O sample.indel.VQSR.vcf.gz \
 ```
