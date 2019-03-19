@@ -131,4 +131,20 @@ gatk/4.0.1.2/gatk ApplyVQSR \
   -mode INDEL \
   -O sample.indel.VQSR.vcf.gz \
 ```
-##
+但是似乎mode模式还是没有区分SNP和INDEL，那只能再SelectVariants一下了
+```shell
+gatk-4.1.0.0/gatk SelectVariants \
+   -V NPC15F.snps.VQSR.vcf.gz \
+   -O NPC15F.final.snp.vcf.gz \
+   -select-type SNP \
+   -R ucsc.hg19.fasta \
+   -L hg19/trim_S07604514_Regions.bed -ip 100 \
+   --tmp-dir ./
+gatk-4.1.0.0/gatk SelectVariants \
+   -V sample.indel.VQSR.vcf.gz \
+   -O sample.final.indel.vcf.gz \
+   -select-type INDEL \
+   -R ucsc.hg19.fasta \
+   -L hg19/trim_S07604514_Regions.bed -ip 100 \
+   --tmp-dir ./
+```
