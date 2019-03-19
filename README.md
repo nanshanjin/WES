@@ -125,7 +125,7 @@ gatk/4.0.1.2/gatk VariantRecalibrator \
   -O sample.indel.recal
 gatk/4.0.1.2/gatk ApplyVQSR \
   -R ref.fa \
-  -input  sample.indel.VQSR.vcf.gz \
+  -V sample.vcf.gz  \
   --tranches-file sample.indel.tranches \
   --recal-file sample.indel.recal \
   -mode INDEL \
