@@ -3,7 +3,16 @@
 
 流程包括
 ## 1 质控
-这部分流程软件很多，不再复述
+# fastp,version 0.19.5
+fastp -i sample_1.fastq.gz -I sample_2.fastq.gz \
+    -o sample_clean_1.fastq.gz -O sample_clean_2.fastq.gz \
+    -q 15 \
+    -u 40 \
+    -n 5 \
+    -l 60 \ #reads shorter than length_required will be discarded, default is 15 目前测序平台双端基本都是150bp，保留60bp以上进入后续分析
+    -W 4 \
+    -M 20 \
+    -h sample_fastp.html -j sample_fastp.json
 
 ## 2 比对
 比对就是把测序数据定位到参考基因组上，确定每一个read在基因组中的位置
